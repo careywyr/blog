@@ -10,9 +10,9 @@
 
 HashMap是上面提到的几个Map中使用频率最高的了，毕竟需要考虑到多线程并发的场景并不算太多。下面是Map的一个关系图，大家了解一下即可。
 
-![Map](https://leafw-blog-pic.oss-cn-hangzhou.aliyuncs.com/blog/2020-01-16-023552.png)
+![Map](https://leafw-blog-pic.oss-cn-hangzhou.aliyuncs.com/UTOOLS1579397021808.png)
 
-HashMap在Java8之前和之后有很大差别，在Java8以前，它的数据结构是数组+链表的形式，8以后就变成了数组+链表+红黑树的结构。它的key是保存在一个一个Set里面的，也就是有去重的功能，values是存在一个Collections里面。
+HashMap在Java8之前和之后有很大差别，在Java8以前，它的数据结构是数组+链表的形式，8以后就变成了数组+链表+红黑树的结构。它的key是保存在一个Set里面的，也就是有去重的功能，values是存在一个Collections里面。
 
 ![HashMap_Java7](https://leafw-blog-pic.oss-cn-hangzhou.aliyuncs.com/UTOOLS1579231511991.png)
 
@@ -82,7 +82,7 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 2. 对Key求Hash值，依据Hash值计算下标
 3. 若未发生碰撞，则直接放入桶中
 4. 若发生碰撞，则以链表的方式链接到后面
-5. 若链表长度唱过阈值，且HashMap元素超过最低树化容量，则将链表转成红黑树
+5. 若链表长度超过阈值，且HashMap元素超过最低树化容量，则将链表转成红黑树
 6. 若节点已经存在，则用新值替换旧值
 7. 若桶满了，就需要resize（扩容2倍后重排）
 

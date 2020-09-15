@@ -1,7 +1,7 @@
 Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域，本篇文章将会对这些数据区域进行简略的介绍。
 JVM所管理的内存包括的数据区域如下图所示：
 
-![image](http://upload-images.jianshu.io/upload_images/1537405-cd11cfec3c8dbf98.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image](https://leafw-blog-pic.oss-cn-hangzhou.aliyuncs.com/j1.png)
 
 根据这张图我们来一个个介绍这些数据区域。
 

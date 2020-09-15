@@ -35,27 +35,31 @@ Spring所有功能的设计和实现都是基于此四大原则的。
 ## Spring Boot快速搭建
 本人使用的开发工具是IDEA，创建Spring Boot项目也比较方便，也推荐大家使用此工具，颜值高，开发体验也很好。
 1新建Spring Initializr项目
-![image](http://upload-images.jianshu.io/upload_images/1537405-318c98e73b7a10b1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image](https://leafw-blog-pic.oss-cn-hangzhou.aliyuncs.com/s1.png)
 
 2.填写项目信息，选择项目使用技术，我们这里选择Web就可以了，填好项目名称，finish。
-![image](http://upload-images.jianshu.io/upload_images/1537405-a11c5617232cad23.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![image](http://upload-images.jianshu.io/upload_images/1537405-1dd1ccfa4c1270fa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![image](http://upload-images.jianshu.io/upload_images/1537405-a710a01fbcb6039d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image](https://leafw-blog-pic.oss-cn-hangzhou.aliyuncs.com/s2.png)
+![image](https://leafw-blog-pic.oss-cn-hangzhou.aliyuncs.com/s3.png)
+
 至此，项目搭建结束，其项目依赖如图：
-![image](http://upload-images.jianshu.io/upload_images/1537405-7fddb8cadf130a36.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image](https://leafw-blog-pic.oss-cn-hangzhou.aliyuncs.com/s4.png)
+
 同时我们可以看到，在我们groupId+artifactId组合包名下有个入口类：
-![image](http://upload-images.jianshu.io/upload_images/1537405-c6a7c93238556d97.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image](https://leafw-blog-pic.oss-cn-hangzhou.aliyuncs.com/s5.png)
+
 我们启动该类中的main方法，这里即是启动本项目：
-![image](http://upload-images.jianshu.io/upload_images/1537405-47a1ba03c21df07f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image](https://leafw-blog-pic.oss-cn-hangzhou.aliyuncs.com/s6.png)
+
 控制台打印输出启动成功，我们为了能看到页面效果，给该类加上@RestController注解，并添加index方法：
-![image](http://upload-images.jianshu.io/upload_images/1537405-1cd9c4ecf87da138.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image](https://leafw-blog-pic.oss-cn-hangzhou.aliyuncs.com/s7.png)
+
 再次启动项目，访问localhost:8080 如图所示
-![image](http://upload-images.jianshu.io/upload_images/1537405-9250c19eb2364fa0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image](https://leafw-blog-pic.oss-cn-hangzhou.aliyuncs.com/s8.png)
 
 通过查看源码可以发现，我们这里的*Application的入口类上的注解@SpringBootApplication注解实际上是组合了@Configuration、@EnableAutoConfiguration、@ComponentScan这几个注解，若不适用@SpringBootApplication，也可使用这三个注解代替。其中@EnableAutoConfiguration让Spring Boot根据类路径中的jar包依赖为当前项目进行自动配置。
 	Spring Boot会自动扫描@SpringBootApplication所在类的同级包，因此建议入口类防止在groupId+artifactId组合包名下。
 	这里也顺便讲个有意思的东西，我们启动Spring Boot的时候是有个默认启动图案的，其实这个是可以换的，我们在src/main/resources下新建一个banner.txt，然后去http://patorjk.com/software/taag 网站生成字符，然后将字符复制到banner.txt中，我写的是LEAFW，再次启动如图：
-	![image](http://upload-images.jianshu.io/upload_images/1537405-f6b079ed773e12be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+	![image](https://leafw-blog-pic.oss-cn-hangzhou.aliyuncs.com/s9.png)
 	
 以上，即为Spring Boot学习第一章节，也是最最最最为基础的东西，后续会更新进一步的学习笔记。
 

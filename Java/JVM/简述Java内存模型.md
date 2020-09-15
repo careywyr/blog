@@ -3,7 +3,7 @@ Java内存模型即Java Memory Model，简称JMM，其规范了Java虚拟机与�
 ## JVM的内存分配
 在解释Java内存模型之前，我们先了解下JVM的内存分配的几个概念，如下图所示，Java内存模型把内存分为两大块，一个是堆一个是栈。
 
-![image](http://upload-images.jianshu.io/upload_images/1537405-1f3a50a821705364.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image](https://leafw-blog-pic.oss-cn-hangzhou.aliyuncs.com/m1.png)
 
 - 堆heap：运行时的数据区，由垃圾回收负责，动态分配大小。存取速度较慢；
 - 栈stack：存取速度比堆快，仅次于寄存器，数据可以共享，大小和生存期等是固定的。
@@ -17,7 +17,7 @@ Java内存模型要求调用栈和本地变量存放在线程栈上，对象存�
 ## 计算机硬件架构
 接下来我们再来看看计算机硬件架构的图示：
 
-![image](http://upload-images.jianshu.io/upload_images/1537405-ffb9eb85055a3609.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image](https://leafw-blog-pic.oss-cn-hangzhou.aliyuncs.com/m2.png)
 
 这里是个多CPU的结构，一个cpu中可能还包含多核。因此我们可以看出，在有两个或者多个cpu的现代计算机上，同时运行多个线程是有可能的，而且每个cpu在某个时刻运行一个线程是没问题的。若Java程序是多线程的，在Java程序中，每个cpu上一个线程是可能同时并发执行的。
 
@@ -29,7 +29,7 @@ CPU操作寄存器的速度要比操作计算机主存快的多，在主存和CP
 
 Java内存模型和硬件内存架构并不一致。硬件内存架构中并没有区分栈和堆，从硬件上看，所有的线程栈和堆都分布在主主存中，当然一部分栈和堆的数据也有可能会存到CPU缓存和寄存器中，如下图所示，Java内存模型和计算机硬件内存架构是一个交叉关系：
 
-![image](http://upload-images.jianshu.io/upload_images/1537405-2e8e77d4698fe75e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image](https://leafw-blog-pic.oss-cn-hangzhou.aliyuncs.com/m3.png)
 
 
 
@@ -45,7 +45,7 @@ Java的并发采用的是共享内存模型，Java线程之间的通信总是隐
 ## Java内存模型的抽象结构
 接下来我们从抽象角度看看线程和主存之间的抽象关系：
 
-![image](http://upload-images.jianshu.io/upload_images/1537405-2d0bf8b27762b70d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image](https://leafw-blog-pic.oss-cn-hangzhou.aliyuncs.com/m4.png)
 
 线程之间的共享变量存储在主内存里，每个线程都有个私有的本地内存，存储了该线程以读/写共享变量的副本。它涵盖了缓存、写缓冲区、寄存器以及其他的硬件和编译器优化。本地内存是JMM的一个抽象概念，并不真实存在。
 
@@ -53,7 +53,7 @@ Java的并发采用的是共享内存模型，Java线程之间的通信总是隐
 1）线程A把本地内存A中更新过的共享变量刷新到主内存中去。
 2）线程B到主内存中去读取线程A之前已更新过的共享变量。
 
-![image](http://upload-images.jianshu.io/upload_images/1537405-c986694adf0258d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image](https://leafw-blog-pic.oss-cn-hangzhou.aliyuncs.com/m5.png)
 
 本地内存A和本地内存B由主内存中共享变量x的副本。假设初始时，这3个内存中的x值都为0。线程A在执行时，把更新后的x值（假设值为1）临时存放在自己的本地内存A中。当线程A和线程B需要通信时，线程A首先会把自己本地内存中修改后的x值刷新到主内
 存中，此时主内存中的x值变为了1。随后，线程B到主内存中去读取线程A更新后的x值，此时线程B的本地内存的x值也变为了1。
@@ -73,7 +73,7 @@ Java的并发采用的是共享内存模型，Java线程之间的通信总是隐
 7. store（存储）：作用于工作内存的变量，把工作内存中的一个变量的值传送到主内存中，以便随后的write操作；
 8. write（写入）: 作用于主内存的变量，他把store操作从工作内存中一个变量的值传送到主内存的变量中。
 
-![image](http://upload-images.jianshu.io/upload_images/1537405-4c755927482f6b64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image](https://leafw-blog-pic.oss-cn-hangzhou.aliyuncs.com/m6.png)
 
 ### 规则
 
